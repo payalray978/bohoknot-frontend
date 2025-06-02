@@ -1,48 +1,70 @@
 <div class="login">
-<div class="login_container" [ngClass]="activeForm === 'Signup' ? 'right-panel-active' : ''" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#">
-			<h1>Create Account</h1>
-			<!-- <div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span> -->
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button (click)="changeView('Login')">Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="#">
-			<h1>Sign in</h1>
-			<!-- <div class="social-container">
+	<div class="login_container" [ngClass]="activeForm === 'Signup' ? 'right-panel-active' : ''" id="container">
+		<div class="form-container sign-up-container">
+			<form action="#" #form="ngForm">
+				<h1>Create Account</h1>
+
+				<div class="mb-3">
+					<input type="text" name="name" class="form-control" #name="ngModel" required placeholder="Name"
+						[(ngModel)]="registerobj.name" />
+					<div class="text-danger">
+						@if (name.errors?.['required']){
+						<small class="">This is Required.</small>
+						}
+					</div>
+				</div>
+				<div class="mb-3">
+					<input type="email" name="email" class="form-control" #email="ngModel" required placeholder="Email"
+						[(ngModel)]="registerobj.email" />
+					<div class="text-danger">
+						@if (email.errors?.['required']){
+						<small class="">This is Required.</small>
+						}
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<input type="text" name="phone" class="form-control" #phone="ngModel" maxlength="10" required
+						pattern="^[0-9]{10}$" placeholder="Phone Number" [(ngModel)]="registerobj.phone" />
+					<div class="text-danger">
+						@if (phone.errors?.['required']){
+						<small class="">This is Required.</small>
+						}
+					</div>
+				</div>
+
+				<button (click)="onRegister()" [disabled]="form.invalid">Sign Up</button>
+			</form>
+		</div>
+		<div class="form-container sign-in-container">
+			<form action="#">
+				<h1>Sign in</h1>
+				<!-- <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span> -->
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<button (click)="changeView('Signup')">Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn" (click)="changeView('Login')">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp" (click)="changeView('Signup')">Sign Up</button>
+				<input type="text" placeholder="Email or Phone Number" class="form-control" />
+				<!-- <input type="password" placeholder="Password" class="form-control" /> -->
+
+				<button class="login_otp mt-3">Login Via OTP</button>
+				<!-- <a href="#">Forgot your password?</a> -->
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" id="signIn" (click)="changeView('Login')">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hello, Friend!</h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" id="signUp" (click)="changeView('Signup')">Sign Up</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
